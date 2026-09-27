@@ -53,6 +53,9 @@
   h2 { font-size: 26px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; }
   .sub { color: var(--muted); margin-bottom: 28px; }
 
+  a.card { display: block; text-decoration: none; color: inherit; }
+  .card .live { color: var(--accent2); }
+
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
   .card { background: linear-gradient(180deg, var(--panel2), var(--panel)); border: 1px solid var(--line); border-radius: 16px; padding: 20px; transition: border-color .15s ease, transform .15s ease; }
   .card:hover { border-color: rgba(124,108,255,.5); transform: translateY(-3px); }
@@ -91,14 +94,14 @@
       </svg>
       ANISIG
     </div>
-    <div class="pill">статус: <b>фаза 0 завершена ✓</b></div>
+    <div class="pill">статус: <b>фаза 1 ✓ · первый проект онлайн</b></div>
   </header>
 
   <div class="hero">
     <div class="tag">творческий хаб · студия сборки</div>
     <h1>Место, где рождается <span>всё</span></h1>
-    <p>Сайты, игры, дизайн, видео и агенты. Один хаб, один стек, один план.
-       Обустраиваем базу — и начинаем строить.</p>
+    <p>Сайты, игры, дизайн, видео и агенты. База — GitHub, стек — 42 инструмента.
+       Хаб уже построен и выпустил первый проект.</p>
     <div class="cta">
       <a class="btn primary" href="https://github.com/tobirama2904-cell/anisig" target="_blank" rel="noopener">Репозиторий на GitHub →</a>
       <a class="btn ghost" href="https://github.com/tobirama2904-cell/anisig/blob/main/docs/tools.md" target="_blank" rel="noopener">Каталог инструментов</a>
@@ -131,12 +134,29 @@
     </div>
   </section>
 
+  <section id="projects">
+    <h2>Проекты</h2>
+    <p class="sub">Каждый проект — отдельный репозиторий на GitHub. Этот хаб — индекс всего, что мы строим.</p>
+    <div class="grid">
+      <a class="card" href="https://tobirama2904-cell.github.io/anisig-arcade/" target="_blank" rel="noopener">
+        <div class="ico">🕹</div><h3>NEON VOID <span class="live">● live</span></h3>
+        <p>Неоновая аркада: уворачивайся от астероидов, собирай энергию. Чистый canvas, ноль зависимостей.</p>
+        <span class="chip">игра · 001</span>
+      </a>
+      <div class="card" style="border-style:dashed; opacity:.7">
+        <div class="ico">✨</div><h3>Следующий проект</h3>
+        <p>Сайт, игра, агент или видео — конвейер готов к запуску.</p>
+        <span class="chip">скоро</span>
+      </div>
+    </div>
+  </section>
+
   <section>
     <h2>План</h2>
     <p class="sub">Двигаемся по фазам — без хаоса.</p>
     <div class="steps">
       <div class="step done"><div class="n">ФАЗА 0 · ГОТОВО ✓</div><h3>Обустройство</h3><p>Репозиторий, лендинг, автодеплой на Pages, каталог из 42 инструментов.</p></div>
-      <div class="step"><div class="n">ФАЗА 1</div><h3>Первый проект</h3><p>Выбираем, что строим первым: сайт, игра, агент или видео.</p></div>
+      <div class="step done"><div class="n">ФАЗА 1 · ГОТОВО ✓</div><h3>Первый проект</h3><p>NEON VOID построен, задеплоен и играется прямо в браузере.</p></div>
       <div class="step"><div class="n">ФАЗА 2</div><h3>Конвейер</h3><p>Шаблон запуска нового проекта: репо → дизайн → код → деплой → ролик в Raylight.</p></div>
       <div class="step"><div class="n">ФАЗА 3</div><h3>Портфолио</h3><p>Витрина всего созданного на этом хабе.</p></div>
     </div>
