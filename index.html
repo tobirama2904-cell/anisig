@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANISIG — творческий хаб</title>
+<style>
+  :root {
+    --bg: #07080c;
+    --panel: #0e1017;
+    --panel2: #131624;
+    --line: #232738;
+    --text: #e8eaf2;
+    --muted: #9aa1b8;
+    --accent: #7c6cff;
+    --accent2: #31d0aa;
+    --gold: #f5c451;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  .glow {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(600px 400px at 15% -5%, rgba(124,108,255,.22), transparent 60%),
+      radial-gradient(700px 500px at 90% 10%, rgba(49,208,170,.13), transparent 60%),
+      radial-gradient(900px 600px at 50% 110%, rgba(124,108,255,.10), transparent 60%);
+  }
+  .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 20px 0; display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .14em; font-size: 15px; }
+  .logo svg { display: block; }
+  .pill { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; background: rgba(255,255,255,.02); }
+  .pill b { color: var(--accent2); font-weight: 600; }
+
+  .hero { padding: 88px 0 64px; text-align: center; }
+  .hero .tag { display:inline-block; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(124,108,255,.35); border-radius: 999px; padding: 7px 16px; margin-bottom: 28px; background: rgba(124,108,255,.08); }
+  h1 { font-size: clamp(40px, 7vw, 72px); line-height: 1.05; font-weight: 800; letter-spacing: -.02em; }
+  h1 span { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { max-width: 640px; margin: 22px auto 0; color: var(--muted); font-size: 18px; }
+  .cta { margin-top: 36px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn { text-decoration: none; font-weight: 600; font-size: 15px; padding: 13px 26px; border-radius: 12px; transition: transform .15s ease, box-shadow .15s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { color: #fff; background: linear-gradient(90deg, var(--accent), #5a8bff); box-shadow: 0 8px 30px rgba(124,108,255,.35); }
+  .btn.ghost { color: var(--text); border: 1px solid var(--line); background: rgba(255,255,255,.02); }
+
+  section { padding: 56px 0; }
+  h2 { font-size: 26px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; }
+  .sub { color: var(--muted); margin-bottom: 28px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+  .card { background: linear-gradient(180deg, var(--panel2), var(--panel)); border: 1px solid var(--line); border-radius: 16px; padding: 20px; transition: border-color .15s ease, transform .15s ease; }
+  .card:hover { border-color: rgba(124,108,255,.5); transform: translateY(-3px); }
+  .card .ico { font-size: 22px; }
+  .card h3 { font-size: 16px; margin: 10px 0 4px; }
+  .card p { font-size: 13.5px; color: var(--muted); }
+  .card .chip { display: inline-block; margin-top: 12px; font-size: 11px; color: var(--accent2); border: 1px solid rgba(49,208,170,.3); background: rgba(49,208,170,.07); border-radius: 999px; padding: 3px 10px; }
+
+  .core { border: 1px solid rgba(124,108,255,.4); background: linear-gradient(120deg, rgba(124,108,255,.12), rgba(49,208,170,.07)), var(--panel); border-radius: 20px; padding: 32px; display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+  .core .bolt { width: 64px; height: 64px; border-radius: 18px; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-size: 30px; flex-shrink: 0; }
+  .core h3 { font-size: 22px; }
+  .core p { color: var(--muted); font-size: 15px; max-width: 640px; }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .step { border: 1px dashed var(--line); border-radius: 16px; padding: 22px; }
+  .step .n { font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: .1em; }
+  .step h3 { font-size: 16px; margin: 8px 0 4px; }
+  .step p { font-size: 13.5px; color: var(--muted); }
+  .step.done { border-color: rgba(49,208,170,.45); background: rgba(49,208,170,.05); }
+
+  footer { padding: 48px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="glow"></div>
+<div class="wrap">
+
+  <header>
+    <div class="logo">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <path d="M13 1 L25 25 H1 Z" fill="url(#g)"/>
+        <defs><linearGradient id="g" x1="0" y1="0" x2="26" y2="26">
+          <stop stop-color="#7c6cff"/><stop offset="1" stop-color="#31d0aa"/>
+        </linearGradient></defs>
+      </svg>
+      ANISIG
+    </div>
+    <div class="pill">статус: <b>фаза 0 завершена ✓</b></div>
+  </header>
+
+  <div class="hero">
+    <div class="tag">творческий хаб · студия сборки</div>
+    <h1>Место, где рождается <span>всё</span></h1>
+    <p>Сайты, игры, дизайн, видео и агенты. Один хаб, один стек, один план.
+       Обустраиваем базу — и начинаем строить.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/tobirama2904-cell/anisig" target="_blank" rel="noopener">Репозиторий на GitHub →</a>
+      <a class="btn ghost" href="https://github.com/tobirama2904-cell/anisig/blob/main/docs/tools.md" target="_blank" rel="noopener">Каталог инструментов</a>
+    </div>
+  </div>
+
+  <section>
+    <div class="core">
+      <div class="bolt">⚡</div>
+      <div>
+        <h3>Ядро стека — Raylight.app</h3>
+        <p>Продуктовые моушн-видео уровня студии прямо в браузере: канвас, анимация без кейфреймов,
+           3D-мокапы устройств, озвучка и импорт из Figma. Всё, что мы строим, получает красивый ленч-ролик.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Инструменты</h2>
+    <p class="sub">Арсенал хаба — 17 своих + 25 проверенных. Полный список с описаниями в репозитории.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">🎬</div><h3>Raylight.app</h3><p>Моушн-дизайн и видео без After Effects</p><span class="chip">ядро</span></div>
+      <div class="card"><div class="ico">🧩</div><h3>21st.dev</h3><p>UI-компоненты для AI-разработки</p><span class="chip">ui</span></div>
+      <div class="card"><div class="ico">✨</div><h3>Jitter.video</h3><p>Быстрый моушн-дизайн в браузере</p><span class="chip">видео</span></div>
+      <div class="card"><div class="ico">🧊</div><h3>Spline</h3><p>Интерактивный 3D для веба</p><span class="chip">3d</span></div>
+      <div class="card"><div class="ico">🤖</div><h3>Manus</h3><p>Автономный AI-агент для задач</p><span class="chip">агент</span></div>
+      <div class="card"><div class="ico">📷</div><h3>Image to Code</h3><p>Скриншот → рабочий код</p><span class="chip">ai</span></div>
+      <div class="card"><div class="ico">🧪</div><h3>Playwright CLI</h3><p>Автоматизация и тесты браузера</p><span class="chip">qa</span></div>
+      <div class="card"><div class="ico">📋</div><h3>Spec Kit</h3><p>Spec-driven разработка от GitHub</p><span class="chip">процесс</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>План</h2>
+    <p class="sub">Двигаемся по фазам — без хаоса.</p>
+    <div class="steps">
+      <div class="step done"><div class="n">ФАЗА 0 · ГОТОВО ✓</div><h3>Обустройство</h3><p>Репозиторий, лендинг, автодеплой на Pages, каталог из 42 инструментов.</p></div>
+      <div class="step"><div class="n">ФАЗА 1</div><h3>Первый проект</h3><p>Выбираем, что строим первым: сайт, игра, агент или видео.</p></div>
+      <div class="step"><div class="n">ФАЗА 2</div><h3>Конвейер</h3><p>Шаблон запуска нового проекта: репо → дизайн → код → деплой → ролик в Raylight.</p></div>
+      <div class="step"><div class="n">ФАЗА 3</div><h3>Портфолио</h3><p>Витрина всего созданного на этом хабе.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div>ANISIG · построено на GitHub + GitHub Pages</div>
+    <div><a href="https://tobirama2904-cell.github.io/">tobirama2904-cell.github.io</a></div>
+  </footer>
+
+</div>
+</body>
+</html>
